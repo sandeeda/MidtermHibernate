@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import train.dao.AdminDao;
+import train.dao.BookingDao;
+import train.dao.PassengerDao;
 import train.dao.TrainDao;
 import train.model.Admin;
+import train.model.Booking;
+import train.model.Passenger;
 import train.model.Train;
 
 @Controller
@@ -27,6 +31,12 @@ public class MainController {
 
 	@Autowired
 	private TrainDao trainDao;
+	
+	@Autowired
+	private PassengerDao passengerDao;
+	
+	@Autowired
+	private BookingDao bookingDao;
 
 	@RequestMapping("/")
 	public String home(Model m) {
@@ -93,6 +103,20 @@ public class MainController {
 		Train trainById = trainDao.getById(Integer.valueOf(trainId));
 		m.addAttribute("trainbyid",trainById);
 		return "bookingform";
+	}
+	@RequestMapping(value = "/handle-booking", method = RequestMethod.POST)
+	public String handleBookingRequest(@RequestParam String trainId,@RequestParam String firstName,@RequestParam String lastName,@RequestParam String phoneNumber,@RequestParam String age,Model m) {
+		Train trainById = trainDao.getById(Integer.valueOf(trainId));
+		Passenger passenger = new Passenger();
+		passenger.setAge(age);
+		passenger.setFirstName(firstName);
+		passenger.setLastName(lastName);
+		passenger.setPhoneNumber(phoneNumber);
+		passengerDao.addPassenger(passenger);
+		Booking booking = new Booking(trainById, passenger);
+		
+		m.addAttribute("booking",booking);
+		return "success";
 	}
 
 }

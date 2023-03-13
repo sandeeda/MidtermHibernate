@@ -66,6 +66,8 @@
 			<list>
 				<value>train.model.Admin</value>
 				<value>train.model.Train</value>
+				<value>train.model.Passenger</value>
+				<value>train.model.Booking</value>
 			</list>
 		</property>
 

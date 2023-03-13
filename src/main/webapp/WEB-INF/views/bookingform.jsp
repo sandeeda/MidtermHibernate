@@ -38,10 +38,10 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <h1 class="text-center">Book Train</h1>
-            <form method="post" action="/handle-booking">
+            <form method="post" action="${pageContext.request.contextPath }/handle-booking">
                 <div class="form-group">
                     <label for="id">Train ID:</label>
-                    <input type="text" class="form-control" id="id" name="id" value="${trainbyid.id}" readonly />
+                    <input type="text" class="form-control" id="id" name="trainId" value="${trainbyid.id}" readonly />
                 </div>
                 <div class="form-group">
                     <label for="source">Source:</label>
