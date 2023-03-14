@@ -114,7 +114,7 @@ public class MainController {
 		passenger.setPhoneNumber(phoneNumber);
 		passengerDao.addPassenger(passenger);
 		Booking booking = new Booking(trainById, passenger);
-		
+		bookingDao.saveBooking(booking);
 		m.addAttribute("booking",booking);
 		return "success";
 	}
